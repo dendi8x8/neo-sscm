@@ -1,0 +1,7 @@
+libX11
+libX11-devel
+libXrandr-devel
+libXcursor-devel
+libXinerama-devel
+libXi-devel
+libglvnd-devel
