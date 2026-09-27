@@ -1,6 +1,6 @@
-SRC        = $(wildcard *.c)
-HEADER     = $(wildcard *.h)
-OBJ        = $(SRC:.c=.o)
+SRC        = $(wildcard src/*.c)
+HEADER     = $(wildcard src/*.h)
+OBJ        = $(wildcard *.o)
 OUT        = sscm
 RAYLIB_PATH= ./deps/raylib/src
 CFLAGS     = -Wall -Wextra -ggdb

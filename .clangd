@@ -1,0 +1,5 @@
+CompileFlags:                     # Tweak the parse settings
+  Add: [-Wall, -I./deps/raylib/src]             # treat all files as C++, enable more warnings
+Diagnostics:
+  MissingIncludes: Strict
+  UnusedIncludes: Strict

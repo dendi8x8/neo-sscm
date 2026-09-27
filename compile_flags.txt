@@ -1,0 +1,2 @@
+-Wall -Wextra -pedantic -L./deps/raylib/src -I./deps/raylib/src \
+-lm -lraylib -lX11
