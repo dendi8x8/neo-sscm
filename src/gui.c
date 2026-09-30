@@ -42,10 +42,10 @@ Rectangle * Create_Bar_Rec()
 
 button * Create_Topbar_Btn(int type)
 {
-    enum { max_text_len = 4 };
+    enum { max_text_len = 5 };
     button *btn = NULL;
 
-    btn = malloc(sizeof(Rectangle));
+    btn = malloc(sizeof(*btn));
     btn->rec = malloc(sizeof(*btn->rec));
     btn->text = malloc(max_text_len);
 
@@ -70,6 +70,7 @@ topbar * Init_Topbar()
 
     bar->rec = Create_Bar_Rec();
     bar->edit_btn = Create_Topbar_Btn(edit);
+    bar->edit_btn->is_clicked = 0;
     return bar;
 }
 
@@ -95,7 +96,51 @@ void Draw_Topbar(topbar *bar)
     Draw_Cordinates_Text();
 }
 
-void Handle_Topbar()
+void Show_Edit_Dialog()
 {
-    ;   /* Empty function */
+    enum {
+        dialog_w = 200,
+        dialog_h = 150,
+        dialog_x = (SCREEN_WIDTH - dialog_w) / 2,
+        dialog_y = (SCREEN_HEIGHT - dialog_h) / 2,
+    };
+    enum { rows_count = 3, row_margin = 2 };
+    const char *rows[rows_count] = {
+        "Open .mdl file",
+        "Open .addoninfo file",
+        "Close program"
+    };
+    int i;
+
+    DrawRectangle(dialog_x, dialog_y, dialog_w, dialog_h, DIALOG_COLOR);
+    for (i = 0; i < rows_count; i++) {
+        int row_y = (dialog_y + i * NORMAL_FONT_SIZE) + row_margin * i;
+        int row_h =  NORMAL_FONT_SIZE;
+        DrawRectangle(
+            dialog_x,
+            row_y,
+            MeasureText(rows[i], NORMAL_FONT_SIZE),
+            row_h,
+            BTN_COLOR
+        );
+        DrawText(rows[i], dialog_x, row_y, row_h , TEXT_COLOR);
+    }
+}
+
+void Handle_Topbar(topbar *bar)
+{
+    enum { clicked_text_x = 10 , clicked_text_y = 500 + NORMAL_FONT_SIZE };
+    Vector2 mouse;
+
+    mouse = GetMousePosition();
+    if (CheckCollisionPointRec(mouse, *bar->edit_btn->rec) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        bar->edit_btn->is_clicked = !bar->edit_btn->is_clicked ;
+    }
+
+    if(!bar->edit_btn->is_clicked) {
+        return;
+    }
+
+    Show_Edit_Dialog();
+    DrawText("Edit button pressed", clicked_text_x, clicked_text_y, NORMAL_FONT_SIZE, TEXT_COLOR);
 }

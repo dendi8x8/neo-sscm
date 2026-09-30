@@ -3,16 +3,16 @@
 
 int main(void)
 {
-    const int width = 800, height = 600;
     topbar *bar = 0;
 
-    InitWindow(width, height, "SSCM - tool for creation addons");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "SSCM - tool for creation addons");
     bar = Init_Topbar();
     while (!WindowShouldClose()) {
           BeginDrawing();
 
           ClearBackground(BG_MAIN_COLOR);
           Draw_Topbar(bar);
+          Handle_Topbar(bar);
 
           EndDrawing();
     }

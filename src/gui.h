@@ -2,12 +2,15 @@
 #define GUI_H_SENTRY_
 #include <raylib.h>
 
+#define SCREEN_WIDTH        800
+#define SCREEN_HEIGHT       600
 #define BASE_FONT_SIZE      32
 #define NORMAL_FONT_SIZE    16
 
 #define BG_MAIN_COLOR       BLACK
 #define BG_TOPBAR_COLOR     VIOLET
 #define BTN_COLOR           BROWN
+#define DIALOG_COLOR        VIOLET
 #define TEXT_COLOR          WHITE
 
 #define FILE_BTN_TEXT "Edit"
@@ -27,5 +30,6 @@ void Handle_Window();
 topbar * Init_Topbar();
 void Destroy_Topbar(topbar *bar);
 void Draw_Topbar(topbar *bar);
+void Handle_Topbar(topbar *bar);
 
 #endif /* GUI_H_SENTRY_ ends here */
