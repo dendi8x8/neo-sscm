@@ -7,15 +7,25 @@
 
 #define BG_MAIN_COLOR       BLACK
 #define BG_TOPBAR_COLOR     VIOLET
-#define TEXT_COLOR          GREEN
+#define BTN_COLOR           BROWN
+#define TEXT_COLOR          WHITE
+
+#define FILE_BTN_TEXT "Edit"
 
 typedef struct {
-    Rectangle rec;
-    Rectangle file_btn;
+    Rectangle   *rec;
+    int         is_clicked;
+    char        *text;
+} button;
+
+typedef struct {
+    Rectangle *rec;
+    button *edit_btn;
 } topbar;
 
 void Handle_Window();
-void Init_Topbar(topbar *bar);
+topbar * Init_Topbar();
+void Destroy_Topbar(topbar *bar);
 void Draw_Topbar(topbar *bar);
 
-#endif
+#endif /* GUI_H_SENTRY_ ends here */

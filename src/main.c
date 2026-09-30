@@ -4,18 +4,20 @@
 int main(void)
 {
     const int width = 800, height = 600;
-    topbar bar;
+    topbar *bar = 0;
 
     InitWindow(width, height, "SSCM - tool for creation addons");
-    Init_Topbar(&bar);
+    bar = Init_Topbar();
     while (!WindowShouldClose()) {
           BeginDrawing();
 
           ClearBackground(BG_MAIN_COLOR);
-          Draw_Topbar(&bar);
+          Draw_Topbar(bar);
 
           EndDrawing();
-      }
+    }
+
+    Destroy_Topbar(bar);
     CloseWindow();
 
     return 0;
