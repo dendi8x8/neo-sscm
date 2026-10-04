@@ -1,6 +1,17 @@
+#include <string.h>
 #include "gui_util.h"
+#include "gui.h"
 
-int Center_Cord(int a, int a0)
+Vector2 Center_Text(const char *text, Rectangle *rec)
 {
-    return 0;
+    Vector2 pos;
+    int text_size;
+
+    pos.x = 0;
+    pos.y = 0;
+    text_size = MeasureText(text, NORMAL_FONT_SIZE);
+    pos.x = (rec->width - text_size) / 2;
+    pos.y = (rec->height - NORMAL_FONT_SIZE) / 2;
+
+    return pos;
 }

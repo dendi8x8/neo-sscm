@@ -1,6 +1,8 @@
 #ifndef GUI_UTIL_H_SENTRY_
 #define GUI_UTIL_H_SENTRY_
 
-int Center_Cord(int a, int a0);
+#include <raylib.h>
+
+Vector2 Center_Text(const char *text, Rectangle *rec);
 
 #endif /*  GUI_UTIL_H_SENTRY_ ends here */

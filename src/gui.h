@@ -1,5 +1,6 @@
 #ifndef GUI_H_SENTRY_
 #define GUI_H_SENTRY_
+
 #include <raylib.h>
 
 #define SCREEN_WIDTH        800
@@ -9,11 +10,11 @@
 
 #define BG_MAIN_COLOR       BLACK
 #define BG_TOPBAR_COLOR     VIOLET
-#define BTN_COLOR           BROWN
+#define BUTTON_COLOR        BROWN
 #define DIALOG_COLOR        VIOLET
 #define TEXT_COLOR          WHITE
 
-#define FILE_BTN_TEXT "Edit"
+#define EDIT_BTN_TEXT "Edit"
 
 typedef struct {
     Rectangle   rec;
@@ -21,27 +22,19 @@ typedef struct {
     char        *text;
 } button;
 
+enum {
+  TB_edit,
+  TB_about
+};
+
 typedef struct {
     Rectangle   *rec;
-    button      *edit_btn;
-} topbar;
-
-typedef struct {
-    Rectangle   rec;
     button      **buttons;
     int         count;
-} dialog;
+} topbar;
+
 
 void Handle_Window();
-
-/* Topbar related functions: */
-topbar * Init_Topbar();
-void Destroy_Topbar(topbar *bar);
-void Draw_Topbar(topbar *bar);
-void Handle_Topbar(topbar *bar, dialog *edit_diag);
-/* Dialog list related functions */
-dialog *Init_Dialog(int lines);
-void Destroy_Dialog(dialog *diag);
-void Create_Dialog(dialog *diag, Rectangle *rec, char **text);
+void Draw_Cordinates_Text();
 
 #endif /* GUI_H_SENTRY_ ends here */
