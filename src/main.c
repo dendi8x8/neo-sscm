@@ -16,8 +16,9 @@ int main(void)
 
           ClearBackground(BG_MAIN_COLOR);
           Draw_Topbar(bar);
-
+          Handle_Topbar(bar);
           Draw_Cordinates_Text();
+
           EndDrawing();
     }
 

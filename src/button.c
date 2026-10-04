@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "button.h"
 #include "gui_util.h"
 
@@ -27,6 +28,22 @@ void Draw_Button(button *btn)
     text_cord = Center_Text(btn->text, &btn->rec);
     DrawRectangleRec(btn->rec, BUTTON_COLOR);
     DrawText(btn->text, text_cord.x, text_cord.y, NORMAL_FONT_SIZE, TEXT_COLOR);
+}
+
+void Handle_Button(button *btn, callback action)
+{
+    Vector2 mouse;
+
+    mouse.x = 0;
+    mouse.y = 0;
+    mouse.x = GetMouseX();
+    mouse.y = GetMouseY();
+    if (CheckCollisionPointRec(mouse, btn->rec) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        btn->is_clicked = !btn->is_clicked;
+    }
+    if (btn->is_clicked) {
+      action();
+    }
 }
 
 void Destroy_Button(button *btn)

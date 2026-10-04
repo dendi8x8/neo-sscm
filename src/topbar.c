@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include <raylib.h>
 #include "topbar.h"
 #include "button.h"
@@ -55,6 +56,28 @@ void Draw_Topbar(topbar *bar)
     for(i = 0; i < bar->count; i++) {
         Draw_Button(bar->buttons[i]);
     }
+}
+
+void Show_Edit_Dialog(void)
+{
+    enum {
+        diag_w = 200,
+        diag_h = 150,
+        diag_x = (SCREEN_WIDTH - diag_w) / 2,
+        diag_y = (SCREEN_HEIGHT - diag_h) / 2,
+    };
+    Rectangle rec;
+
+    rec.x = diag_x;
+    rec.y = diag_y;
+    rec.width = diag_w;
+    rec.height = diag_h;
+    DrawRectangleRec(rec, DIALOG_COLOR);
+}
+
+void Handle_Topbar(topbar *bar)
+{
+    Handle_Button(bar->buttons[TB_edit], Show_Edit_Dialog);
 }
 
 void Destroy_Topbar(topbar *bar)

@@ -5,7 +5,8 @@
 #include "gui.h"
 
 topbar * Create_Topbar();
-void Destroy_Topbar(topbar *bar);
 void Draw_Topbar(topbar *bar);
+void Handle_Topbar(topbar *bar);
+void Destroy_Topbar(topbar *bar);
 
 #endif
