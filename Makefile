@@ -3,8 +3,7 @@ HEADER     = $(wildcard src/*.h)
 OBJ        = $(notdir $(SRC:.c=.o))
 OUT        = sscm
 RAYLIB_PATH= ./deps/raylib/src
-CFLAGS     = -Wall -Wextra -ggdb 
-# -fsanitize=address -fsanitize-address-use-after-scope
+CFLAGS     = -Wall -Wextra -ggdb -fsanitize=address -fsanitize-address-use-after-scope
 LDFLAGS    = -L$(RAYLIB_PATH) -I$(RAYLIB_PATH) \
 	     -lm -lraylib -lX11
 

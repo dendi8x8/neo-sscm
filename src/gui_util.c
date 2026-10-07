@@ -15,3 +15,11 @@ Vector2 Center_Text(const char *text, Rectangle *rec)
 
     return pos;
 }
+
+void Copy_Rec(Rectangle *dst, Rectangle *src)
+{
+    dst->x = src->x;
+    dst->y = src->y;
+    dst->width = src->width;
+    dst->height = src->height;
+}

@@ -30,7 +30,7 @@ void Draw_Button(button *btn)
     DrawText(btn->text, text_cord.x, text_cord.y, NORMAL_FONT_SIZE, TEXT_COLOR);
 }
 
-void Handle_Button(button *btn, callback action)
+void Handle_Button(button *btn, callback action, void *param)
 {
     Vector2 mouse;
 
@@ -42,7 +42,7 @@ void Handle_Button(button *btn, callback action)
         btn->is_clicked = !btn->is_clicked;
     }
     if (btn->is_clicked) {
-      action();
+      action(param);
     }
 }
 
