@@ -1,9 +1,10 @@
-#ifndef GUI_UTIL_H_SENTRY_
-#define GUI_UTIL_H_SENTRY_
+#ifndef GUI_UTIL_H_
+#define GUI_UTIL_H_
 
 #include <raylib.h>
 
-Vector2 Center_Text(const char *text, Rectangle *rec);
+void Fill_Rec(Rectangle *dst, float x, float y, float width, float height);
 void Copy_Rec(Rectangle *dst, Rectangle *src);
+void Copy_Color(Color *dst, Color *src);
 
-#endif /*  GUI_UTIL_H_SENTRY_ ends here */
+#endif /* GUI_UTIL_H_ */

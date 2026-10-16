@@ -1,29 +1,25 @@
-#include "raylib.h"
-#include <string.h>
+#include <raylib.h>
 #include "gui.h"
 #include "topbar.h"
 
 int main(void)
 {
-    topbar *bar = NULL;
+    topbar *main_topbar;
 
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "SSCM - tool for creation addons");
+    main_topbar = Create_Main_Topbar();
 
-    bar = Create_Topbar();
-
+    InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Neo-SSCM");
     while (!WindowShouldClose()) {
-          BeginDrawing();
+        BeginDrawing();
 
-          ClearBackground(BG_MAIN_COLOR);
-          Draw_Topbar(bar);
-          Handle_Topbar(bar);
-          Draw_Cordinates_Text();
+        ClearBackground(BLACK);
+        Draw_Topbar(main_topbar);
+        Handle_Topbar(main_topbar);
 
-          EndDrawing();
+        EndDrawing();
     }
 
-    Destroy_Topbar(bar);
     CloseWindow();
-
+    Destroy_Main_Topbar(main_topbar);
     return 0;
 }

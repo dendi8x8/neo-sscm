@@ -1,25 +1,26 @@
-#include <string.h>
+#include <raylib.h>
 #include "gui_util.h"
-#include "gui.h"
 
-Vector2 Center_Text(const char *text, Rectangle *rec)
+void Fill_Rec(Rectangle *dst, float x, float y, float width, float height)
 {
-    Vector2 pos;
-    int text_size;
-
-    pos.x = 0;
-    pos.y = 0;
-    text_size = MeasureText(text, NORMAL_FONT_SIZE);
-    pos.x = (rec->width - text_size) / 2;
-    pos.y = (rec->height - NORMAL_FONT_SIZE) / 2;
-
-    return pos;
+    dst->x      = x;
+    dst->y      = y;
+    dst->width  = width;
+    dst->height = height;
 }
 
 void Copy_Rec(Rectangle *dst, Rectangle *src)
 {
-    dst->x = src->x;
-    dst->y = src->y;
-    dst->width = src->width;
+    dst->x      = src->x;
+    dst->y      = src->y;
+    dst->width  = src->width;
     dst->height = src->height;
+}
+
+void Copy_Color(Color *dst, Color *src)
+{
+    dst->r = src->r;
+    dst->b = src->b;
+    dst->g = src->g;
+    dst->a = src->a;
 }

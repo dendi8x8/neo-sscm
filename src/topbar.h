@@ -2,11 +2,21 @@
 #define  TOPBAR_H_SENTRY
 
 #include <raylib.h>
-#include "gui.h"
+#include "button.h"
 
-topbar * Create_Topbar();
+typedef struct {
+    Rectangle   rec;
+    Color       color;
+    button      **buttons;
+    int         btns_count;
+} topbar;
+
+topbar * Create_Topbar(Rectangle *rec, Color color, button **buttons, int count);
 void Draw_Topbar(topbar *bar);
 void Handle_Topbar(topbar *bar);
 void Destroy_Topbar(topbar *bar);
+topbar * Create_Main_Topbar();
+void Destroy_Main_Topbar(topbar *bar);
 
-#endif
+
+#endif /* TOPBAR_H_SENTRY */

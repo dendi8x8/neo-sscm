@@ -1,18 +1,27 @@
-#ifndef BUTTON_H_SENTRY_
-#define BUTTON_H_SENTRY_
+#ifndef BUTTON_H_SENTRY
+#define BUTTON_H_SENTRY
 
 #include <raylib.h>
-#include "gui.h"
 
-typedef void (*callback)(dialog *);
+typedef void (*action_t)(void *);
+typedef struct {
+    action_t    call;
+    void        *param;
+} button_callback;
 
-enum {
-  BTN_Action_Show_Dialog,
-};
+typedef struct {
+    Rectangle           rec;
+    Color               color;
+    button_callback     action;
+    int                 is_clicked;
+    char                *text;
+} button;
 
-button * Create_Button(Rectangle *rec, const char *text);
+button * Create_Button(Rectangle *rec, Color *color, char *text,
+        button_callback *clbck);
+void Handle_Button(button *btn);
+
 void Draw_Button(button *btn);
-void Handle_Button(button *btn, callback action, void *diag);
 void Destroy_Button(button *btn);
 
-#endif /* BUTTON_H_SENTRY_ ends here. */
+#endif /* BUTTON_H_SENTRY */
