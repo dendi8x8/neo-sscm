@@ -24,3 +24,17 @@ void Copy_Color(Color *dst, Color *src)
     dst->g = src->g;
     dst->a = src->a;
 }
+
+Vector2 Center_Text(Rectangle *rec, const char *text, int f_size)
+{
+    Vector2 new_pos;
+    float text_width;
+
+    text_width = rec->width - MeasureText(text, f_size);
+    new_pos.x = 0;
+    new_pos.y = 0;
+    new_pos.x = rec->x + text_width / 2;
+    new_pos.y = (rec->height - f_size) / 2;
+
+    return new_pos;
+}

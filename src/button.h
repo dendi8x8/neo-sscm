@@ -17,7 +17,7 @@ typedef struct {
     char                *text;
 } button;
 
-button * Create_Button(Rectangle *rec, Color *color, char *text,
+button * Create_Button(Rectangle *rec, Color color, const char *text,
         button_callback *clbck);
 void Handle_Button(button *btn);
 

@@ -1,5 +1,6 @@
 #include <raylib.h>
 #include <stdlib.h>
+#include <string.h>
 #include "gui.h"
 #include "gui_util.h"
 #include "button.h"
@@ -36,6 +37,7 @@ void Draw_Topbar(topbar *bar)
 void Handle_Topbar(topbar *bar)
 {
     int i;
+
     for (i = 0; i < bar->btns_count; i++) {
         Handle_Button(bar->buttons[i]);
     }
@@ -46,6 +48,34 @@ void Destroy_Topbar(topbar *bar)
     free(bar);
 }
 
+button **Create_Main_Buttons(int count)
+{
+    enum { /* Buttons dimensions */
+        x = 0,
+        y = 0,
+        width = 50,
+        height = 50
+    };
+    const char *texts[] = {
+        "Edit",     /* First button*/
+        "About",     /* Second button */
+    };
+    button **buttons = NULL;
+    button_callback clbck;
+    Rectangle rec;
+    int i;
+
+    buttons = malloc(count * sizeof(*buttons));
+    clbck.call = show_about_dialog;
+    Fill_Rec(&rec, x, y, width, height);
+    for (i = 0; i < count; i++) {
+        rec.x = width * i;
+        buttons[i] = Create_Button(&rec, TOPBAR_BUTTON_COLOR, texts[i], &clbck);
+    }
+
+    return buttons;
+}
+
 topbar * Create_Main_Topbar()
 {
     enum { /* Bar dimensions */
@@ -54,34 +84,14 @@ topbar * Create_Main_Topbar()
         bar_width = WINDOW_WIDTH,
         bar_height = 50
     };
-    enum { /* Button bar dimensions */
-        btn_x = 0,
-        btn_y = 0,
-        btn_width = 50,
-        btn_height = 50
-    };
-    enum {
-        btns_count = 1,
-    };
-
+    enum { buttons_count = 2 };
     Rectangle rec;
     topbar *bar = NULL;
-    button **buttons;
-    int i;
+    button **buttons = NULL;
 
-    buttons = malloc(sizeof(*buttons) * btns_count);
-    for (i = 0; i < btns_count; i++) {
-        buttons[i] = malloc(sizeof(*buttons[0]));
-        buttons[i]->action.call = show_about_dialog;
-        Fill_Rec(&buttons[i]->rec,
-                btn_x + i * btn_width, btn_y,
-                btn_width, btn_height
-        );
-        buttons[i]->color = TOPBAR_BUTTON_COLOR;
-    }
-
+    buttons = Create_Main_Buttons(buttons_count);
     Fill_Rec(&rec, bar_x, bar_y, bar_width, bar_height);
-    bar = Create_Topbar(&rec, TOPBAR_COLOR, buttons, btns_count);
+    bar = Create_Topbar(&rec, TOPBAR_COLOR, buttons, buttons_count);
 
     return bar;
 }
@@ -91,7 +101,7 @@ void Destroy_Main_Topbar(topbar *bar)
     int i;
 
     for (i = 0; i < bar->btns_count; i++) {
-        free(bar->buttons[i]);
+        Destroy_Button(bar->buttons[i]);
     }
     free(bar->buttons);
     Destroy_Topbar(bar);

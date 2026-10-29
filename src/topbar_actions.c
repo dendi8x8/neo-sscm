@@ -1,7 +1,19 @@
 #include <raylib.h>
+#include <stdlib.h>
 #include "gui.h"
 #include "gui_util.h"
 #include "topbar_actions.h"
+
+actions_table * Init_Actions_Table()
+{
+    actions_table *table = NULL;
+    int i;
+
+    table = malloc(sizeof(*table));
+    for (i = 0; i < TB_Actions_Count; i++) {
+    }
+    return table;
+}
 
 void show_about_dialog()
 {
