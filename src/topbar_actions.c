@@ -4,20 +4,34 @@
 #include "gui_util.h"
 #include "topbar_actions.h"
 
-actions_table * Init_Actions_Table()
+actions_table * TB_Init_Actions_Table()
 {
     actions_table *table = NULL;
-    int i;
 
     table = malloc(sizeof(*table));
-    for (i = 0; i < TB_Actions_Count; i++) {
-    }
+    table->actions[TB_Action_Edit].call = show_edit_dialog;
+    table->actions[TB_Action_About].call = show_about_dialog;
+
     return table;
 }
 
-void show_about_dialog()
+void show_edit_dialog(void *param)
 {
-    /* #TODO(17.10.26): Create center function. */
+    enum { /* Dialog dimensions */
+        edit_width = 200,
+        edit_x = (WINDOW_WIDTH - edit_width) / 2,
+        edit_height = 300,
+        edit_y = (WINDOW_HEIGHT - edit_width) / 2
+    };
+    Rectangle rec;
+
+    Fill_Rec(&rec, edit_x, edit_y, edit_width, edit_height);
+    DrawRectangleRec(rec, DIALOG_COLOR);
+}
+
+void show_about_dialog(void *param)
+{
+    /* #TODO(17.10.26): Create center macros. */
     enum {
         about_width = 200,
         about_x = (WINDOW_WIDTH - about_width) / 2,
@@ -28,4 +42,9 @@ void show_about_dialog()
 
     Fill_Rec(&rec, about_x, about_y, about_width, about_height);
     DrawRectangleRec(rec, DIALOG_COLOR);
+}
+
+void TB_Destroy_Actions_Table(actions_table *table)
+{
+    free(table);
 }

@@ -48,7 +48,7 @@ void Destroy_Topbar(topbar *bar)
     free(bar);
 }
 
-button **Create_Main_Buttons(int count)
+button **Create_Main_Buttons(int count, actions_table *table)
 {
     enum { /* Buttons dimensions */
         x = 0,
@@ -57,7 +57,7 @@ button **Create_Main_Buttons(int count)
         height = 50
     };
     const char *texts[] = {
-        "Edit",     /* First button*/
+        "Edit",      /* First button*/
         "About",     /* Second button */
     };
     button **buttons = NULL;
@@ -66,9 +66,9 @@ button **Create_Main_Buttons(int count)
     int i;
 
     buttons = malloc(count * sizeof(*buttons));
-    clbck.call = show_about_dialog;
     Fill_Rec(&rec, x, y, width, height);
     for (i = 0; i < count; i++) {
+        clbck.call = table->actions[i].call;
         rec.x = width * i;
         buttons[i] = Create_Button(&rec, TOPBAR_BUTTON_COLOR, texts[i], &clbck);
     }
@@ -76,7 +76,7 @@ button **Create_Main_Buttons(int count)
     return buttons;
 }
 
-topbar * Create_Main_Topbar()
+topbar * Create_Main_Topbar(actions_table *table)
 {
     enum { /* Bar dimensions */
         bar_x = 0,
@@ -89,7 +89,7 @@ topbar * Create_Main_Topbar()
     topbar *bar = NULL;
     button **buttons = NULL;
 
-    buttons = Create_Main_Buttons(buttons_count);
+    buttons = Create_Main_Buttons(buttons_count, table);
     Fill_Rec(&rec, bar_x, bar_y, bar_width, bar_height);
     bar = Create_Topbar(&rec, TOPBAR_COLOR, buttons, buttons_count);
 
